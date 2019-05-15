@@ -23,53 +23,35 @@ h1 {
 
 /*
 
-https://angular.io/tutorial/toh-pt4#provide-the-heroservice
+https://angular.io/tutorial/toh-pt4#add-getheroes
 
-Provide the HeroService
 
-You must make the HeroService available to the dependency injection system before Angular can inject it into the HeroesComponent, as you will do below. You do this by registering a provider. A provider is something that can create or deliver a service; in this case, it instantiates the HeroService class to provide the service.
+Add getHeroes()
+Create a function to retrieve the heroes from the service.
 
-Now, you need to make sure that the HeroService is registered as the provider of this service. You are registering it with an injector, which is the object that is responsible for choosing and injecting the provider where it is required.
+getHeroes(): void {
+  this.heroes = this.heroService.getHeroes();
+}
 
-By default, the Angular CLI command ng generate service registers a provider with the root injector for your service by including provider metadata in the @Injectable decorator.
+Call it in ngOnInit
 
-If you look at the @Injectable() statement right before the HeroService class definition, you can see that the providedIn metadata value is 'root':
+While you could call getHeroes() in the constructor, that's not the best practice.
 
-@Injectable({
-  providedIn: 'root',
-})
-When you provide the service at the root level, Angular creates a single, shared instance of HeroService and injects into any class that asks for it. Registering the provider in the @Injectable metadata also allows Angular to optimize an app by removing the service if it turns out not to be used after all.
+Reserve the constructor for simple initialization such as wiring constructor parameters to properties. The constructor shouldn't do anything. It certainly shouldn't call a function that makes HTTP requests to a remote server as a real data service would.
 
-To learn more about providers, see the Providers section. To learn more about injectors, see the Dependency Injection guide.
+Instead, call getHeroes() inside the ngOnInit lifecycle hook and let Angular call ngOnInit at an appropriate time after constructing a HeroesComponent instance.
 
-The HeroService is now ready to plug into the HeroesComponent.
+ngOnInit() {
+  this.getHeroes();
+}
 
-This is an interim code sample that will allow you to provide and use the HeroService. At this point, the code will differ from the HeroService in the "final code review".
+See it run
+After the browser refreshes, the app should run as before, showing a list of heroes and a hero detail view when you click on a hero name.
 
-Update HeroesComponent
+Instead, I get:
+ERROR TypeError: this.heroService.getHeroes is not a function at HeroesComponent ln21
 
-Open the HeroesComponent class file.
-
-Delete the HEROES import, because you won't need that anymore. Import the HeroService instead.
-
-Update HeroesComponent
-Open the HeroesComponent class file.
-
-Delete the HEROES import, because you won't need that anymore. Import the HeroService instead.
-
-src/app/heroes/heroes.component.ts (import HeroService)
-
-import { HeroService } from '../hero.service';
-Replace the definition of the heroes property with a simple declaration.
-
-heroes: Hero[];
-
-Inject the HeroService
-
-Add a private heroService parameter of type HeroService to the constructor.
-
-The parameter simultaneously defines a private heroService property and identifies it as a HeroService injection site.
-
-When Angular creates a HeroesComponent, the Dependency Injection system sets the heroService parameter to the singleton instance of HeroService.
+Continue at:
+https://angular.io/tutorial/toh-pt4#observable-data
 
 */
