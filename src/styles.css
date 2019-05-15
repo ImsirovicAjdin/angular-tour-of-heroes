@@ -23,14 +23,14 @@ h1 {
 
 /*
 
-Return to the HeroesComponent class and import the Hero class.
+https://angular.io/tutorial/toh-pt1#show-the-hero-object
 
-Refactor the component's hero property to be of type Hero. Initialize it with an id of 1 and the name Windstorm.
+Show the hero object
 
-The revised HeroesComponent class file should look like this:
+Update the binding in the template to announce the hero's name and show both id and name in a details layout like this:
 ```...```
 
-The page no longer displays properly because you changed the hero from a string to an object.
+The browser refreshes and displays the hero's information.
 
 
 */
