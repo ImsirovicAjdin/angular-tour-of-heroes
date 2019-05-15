@@ -23,15 +23,14 @@ h1 {
 
 /*
 
-https://angular.io/tutorial/toh-pt1#create-a-hero-class
+Return to the HeroesComponent class and import the Hero class.
 
-Create a Hero class
+Refactor the component's hero property to be of type Hero. Initialize it with an id of 1 and the name Windstorm.
 
-A real hero is more than a name.
+The revised HeroesComponent class file should look like this:
+```...```
 
-Create a Hero class in its own file in the src/app folder. Give it id and name properties.
-
-
+The page no longer displays properly because you changed the hero from a string to an object.
 
 
 */
