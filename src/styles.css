@@ -23,30 +23,29 @@ h1 {
 
 /*
 
-https://angular.io/tutorial/toh-pt4#services
+https://angular.io/tutorial/toh-pt4#injectable-services
 
-Services
-The Tour of Heroes HeroesComponent is currently getting and displaying fake data.
+@Injectable() services
+Notice that the new service imports the Angular Injectable symbol and annotates the class with the @Injectable() decorator. This marks the class as one that participates in the dependency injection system. The HeroService class is going to provide an injectable service, and it can also have its own injected dependencies. It doesn't have any dependencies yet, but it will soon.
 
-After the refactoring in this tutorial, HeroesComponent will be lean and focused on supporting the view. It will also be easier to unit-test with a mock service.
+The @Injectable() decorator accepts a metadata object for the service, the same way the @Component() decorator did for your component classes.
 
-Why services
-Components shouldn't fetch or save data directly and they certainly shouldn't knowingly present fake data. They should focus on presenting data and delegate data access to a service.
+Get hero data
+The HeroService could get hero data from anywhere—a web service, local storage, or a mock data source.
 
-In this tutorial, you'll create a HeroService that all application classes can use to get heroes. Instead of creating that service with new, you'll rely on Angular dependency injection to inject it into the HeroesComponent constructor.
+Removing data access from components means you can change your mind about the implementation anytime, without touching any components. They don't know how the service works.
 
-Services are a great way to share information among classes that don't know each other. You'll create a MessageService and inject it in two places:
+The implementation in this tutorial will continue to deliver mock heroes.
 
-in HeroService which uses the service to send a message.
-in MessagesComponent which displays that message.
+Import the Hero and HEROES.
 
-Create the HeroService
+import { Hero } from './hero';
+import { HEROES } from './mock-heroes';
 
-Using the Angular CLI, create a service called hero.
+Add a getHeroes method to return the mock heroes.
 
-ng g s hero
-
-The command generates skeleton HeroService class in src/app/hero.service.ts The HeroService class should look like the following example.
-`.`
+getHeroes(): Hero[] {
+  return HEROES;
+}
 
 */
