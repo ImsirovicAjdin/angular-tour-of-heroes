@@ -23,53 +23,23 @@ h1 {
 
 /*
 
-https://angular.io/tutorial/toh-pt1#edit-the-hero
+https://angular.io/tutorial/toh-pt1#declare-heroescomponent
 
-Edit the hero
+Declare HeroesComponent
+Every component must be declared in exactly one NgModule.
 
-Users should be able to edit the hero name in an <input> textbox.
+You didn't declare the HeroesComponent. So why did the application work?
 
-The textbox should both display the hero's name property and update that property as the user types. That means data flow from the component class out to the screen and from the screen back to the class.
+It worked because the Angular CLI declared HeroesComponent in the AppModule when it generated that component.
 
-To automate that data flow, setup a two-way data binding between the <input> form element and the hero.name property.
+Open src/app/app.module.ts and find HeroesComponent imported near the top.
 
-Two-way binding
-Refactor the details area in the HeroesComponent template so it looks like this:
+import { HeroesComponent } from './heroes/heroes.component';
+
+The HeroesComponent is declared in the @NgModule.declarations array.
 `.`
 
-[(ngModel)] is Angular's two-way data binding syntax.
-
-Here it binds the hero.name property to the HTML textbox so that data can flow in both directions: from the hero.name property to the textbox, and from the textbox back to the hero.name.
-
-The missing FormsModule
-Notice that the app stopped working when you added [(ngModel)].
-
-To see the error, open the browser development tools and look in the console for a message like:
-
-Template parse errors:
-Can't bind to 'ngModel' since it isn't a known property of 'input'.
-
-Although ngModel is a valid Angular directive, it isn't available by default.
-
-It belongs to the optional FormsModule and you must opt-in to using it.
-
-AppModule
-Angular needs to know how the pieces of your application fit together and what other files and libraries the app requires. This information is called metadata
-
-Some of the metadata is in the @Component decorators that you added to your component classes. Other critical metadata is in @NgModule decorators.
-
-The most important @NgModule decorator annotates the top-level AppModule class.
-
-The Angular CLI generated an AppModule class in src/app/app.module.ts when it created the project. This is where you opt-in to the FormsModule.
-
-Import FormsModule
-Open AppModule (app.module.ts) and import the FormsModule symbol from the @angular/forms library.
-`.`
-
-Then add FormsModule to the @NgModule metadata's imports array, which contains a list of external modules that the app needs.
-`.`
-
-When the browser refreshes, the app should work again. You can edit the hero's name and see the changes reflected immediately in the <h2> above the textbox.
+Note that AppModule declares both application components, AppComponent and HeroesComponent.
 
 
 */
