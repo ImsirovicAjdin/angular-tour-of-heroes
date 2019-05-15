@@ -22,32 +22,42 @@ h1 {
   }
 
 /*
-Master/Detail Components
 
-At the moment, the HeroesComponent displays both the list of heroes and the selected hero's details.
+https://angular.io/tutorial/toh-pt3#write-the-template
 
-Keeping all features in one component as the application grows will not be maintainable. You'll want to split up large components into smaller sub-components, each focused on a specific task or workflow.
+Write the template
 
-In this page, you'll take the first step in that direction by moving the hero details into a separate, reusable HeroDetailComponent.
+Cut the HTML for the hero detail from the bottom of the HeroesComponent template and paste it over the generated boilerplate in the HeroDetailComponent template.
 
-The HeroesComponent will only present the list of heroes. The HeroDetailComponent will present details of a selected hero.
+The pasted HTML refers to a selectedHero. The new HeroDetailComponent can present any hero, not just a selected hero. So replace "selectedHero" with "hero" everywhere in the template.
 
-Make the HeroDetailComponent
-Use the Angular CLI to generate a new component named hero-detail.
+When you're done, the HeroDetailComponent template should look like this:
+`.`
 
-ng generate component hero-detail
+Add the @Input() hero property
+The HeroDetailComponent template binds to the component's hero property which is of type Hero.
 
-The command scaffolds the following:
+Open the HeroDetailComponent class file and import the Hero symbol.
 
-Creates a directory src/app/hero-detail.
-Inside that directory four files are generated:
+src/app/hero-detail/hero-detail.component.ts (import Hero)
 
-A CSS file for the component styles.
-An HTML file for the component template.
-A TypeScript file with a component class named HeroDetailComponent.
-A test file for the HeroDetailComponent class.
-The command also adds the HeroDetailComponent as a declaration in the @NgModule decorator of the src/app/app.module.ts file.
+The hero property must be an Input property, annotated with the @Input() decorator, because the external HeroesComponent will bind to it like this.
 
+The hero property must be an Input property, annotated with the @Input() decorator, because the external HeroesComponent will bind to it like this.
+
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+
+Amend the @angular/core import statement to include the Input symbol.
+
+src/app/hero-detail/hero-detail.component.ts (import Input)
+
+import { Component, OnInit, Input } from '@angular/core';
+
+Add a hero property, preceded by the @Input() decorator.
+
+@Input() hero: Hero;
+
+That's the only change you should make to the HeroDetailComponent class. There are no more properties. There's no presentation logic. This component simply receives a hero object through its hero property and displays it.
 
 
 */
