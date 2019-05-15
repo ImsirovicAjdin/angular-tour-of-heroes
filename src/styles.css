@@ -23,23 +23,49 @@ h1 {
 
 /*
 
-https://angular.io/tutorial/toh-pt1#declare-heroescomponent
+https://angular.io/tutorial/toh-pt2#display-a-heroes-list
 
-Declare HeroesComponent
-Every component must be declared in exactly one NgModule.
+Display a Heroes List
 
-You didn't declare the HeroesComponent. So why did the application work?
+In this page, you'll expand the Tour of Heroes app to display a list of heroes, and allow users to select a hero and display the hero's details.
 
-It worked because the Angular CLI declared HeroesComponent in the AppModule when it generated that component.
+Create mock heroes
+You'll need some heroes to display.
 
-Open src/app/app.module.ts and find HeroesComponent imported near the top.
+Eventually you'll get them from a remote data server. For now, you'll create some mock heroes and pretend they came from the server.
 
-import { HeroesComponent } from './heroes/heroes.component';
-
-The HeroesComponent is declared in the @NgModule.declarations array.
+Create a file called mock-heroes.ts in the src/app/ folder. Define a HEROES constant as an array of ten heroes and export it. The file should look like this.
 `.`
 
-Note that AppModule declares both application components, AppComponent and HeroesComponent.
+Displaying heroes
+You're about to display the list of heroes at the top of the HeroesComponent.
 
+Open the HeroesComponent class file and import the mock HEROES.
+`.`
+
+In the same file (HeroesComponent class), define a component property called heroes to expose HEROES array for binding.
+
+https://angular.io/tutorial/toh-pt2#list-heroes-with-ngfor
+
+List heroes with *ngFor
+Open the HeroesComponent template file and make the following changes:
+
+Add an <h2> at the top,
+Below it add an HTML unordered list (<ul>)
+Insert an <li> within the <ul> that displays properties of a hero.
+Sprinkle some CSS classes for styling (you'll add the CSS styles shortly).
+Make it look like this:
+`.`
+
+The *ngFor is Angular's repeater directive. It repeats the host element for each element in a list.
+
+In this example
+
+<li> is the host element
+heroes is the list from the HeroesComponent class.
+hero holds the current hero object for each iteration through the list.
+Don't forget the asterisk (*) in front of ngFor. It's a critical part of the syntax.
+
+After the browser refreshes, the list of heroes appears.
 
 */
