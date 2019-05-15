@@ -23,13 +23,15 @@ h1 {
 
 /*
 
-https://angular.io/tutorial/toh-pt1#show-the-heroescomponent-view
+https://angular.io/tutorial/toh-pt1#create-a-hero-class
 
-Show the HeroesComponent view
-To display the HeroesComponent, you must add it to the template of the shell AppComponent.
+Create a Hero class
 
-Remember that app-heroes is the element selector for the HeroesComponent. So add an <app-heroes> element to the AppComponent template file, just below the title.
+A real hero is more than a name.
 
-Assuming that the CLI ng serve command is still running, the browser should refresh and display both the application title and the hero name.
+Create a Hero class in its own file in the src/app folder. Give it id and name properties.
+
+
+
 
 */
