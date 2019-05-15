@@ -22,25 +22,31 @@ h1 {
   }
 
 /*
+Master/Detail Components
 
-After the browser refreshes, the list of names reappears. The details area is blank. Click a hero and its details appear.
+At the moment, the HeroesComponent displays both the list of heroes and the selected hero's details.
 
-Why it works
-When selectedHero is undefined, the ngIf removes the hero detail from the DOM. There are no selectedHero bindings to worry about.
+Keeping all features in one component as the application grows will not be maintainable. You'll want to split up large components into smaller sub-components, each focused on a specific task or workflow.
 
-When the user picks a hero, selectedHero has a value and ngIf puts the hero detail into the DOM.
+In this page, you'll take the first step in that direction by moving the hero details into a separate, reusable HeroDetailComponent.
 
-Style the selected hero
-It's difficult to identify the selected hero in the list when all <li> elements look alike.
+The HeroesComponent will only present the list of heroes. The HeroDetailComponent will present details of a selected hero.
 
-If the user clicks "Magneta", that hero should render with a distinctive but subtle background color like this:
+Make the HeroDetailComponent
+Use the Angular CLI to generate a new component named hero-detail.
 
-Selected hero
-That selected hero coloring is the work of the .selected CSS class in the styles you added earlier. You just have to apply the .selected class to the <li> when the user clicks it.
+ng generate component hero-detail
 
-The Angular class binding makes it easy to add and remove a CSS class conditionally. Just add [class.some-css-class]="some-condition" to the element you want to style.
+The command scaffolds the following:
 
-Add the following [class.selected] binding to the <li> in the HeroesComponent template:
+Creates a directory src/app/hero-detail.
+Inside that directory four files are generated:
+
+A CSS file for the component styles.
+An HTML file for the component template.
+A TypeScript file with a component class named HeroDetailComponent.
+A test file for the HeroDetailComponent class.
+The command also adds the HeroDetailComponent as a declaration in the @NgModule decorator of the src/app/app.module.ts file.
 
 
 
