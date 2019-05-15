@@ -23,29 +23,53 @@ h1 {
 
 /*
 
-https://angular.io/tutorial/toh-pt4#injectable-services
+https://angular.io/tutorial/toh-pt4#provide-the-heroservice
 
-@Injectable() services
-Notice that the new service imports the Angular Injectable symbol and annotates the class with the @Injectable() decorator. This marks the class as one that participates in the dependency injection system. The HeroService class is going to provide an injectable service, and it can also have its own injected dependencies. It doesn't have any dependencies yet, but it will soon.
+Provide the HeroService
 
-The @Injectable() decorator accepts a metadata object for the service, the same way the @Component() decorator did for your component classes.
+You must make the HeroService available to the dependency injection system before Angular can inject it into the HeroesComponent, as you will do below. You do this by registering a provider. A provider is something that can create or deliver a service; in this case, it instantiates the HeroService class to provide the service.
 
-Get hero data
-The HeroService could get hero data from anywhere—a web service, local storage, or a mock data source.
+Now, you need to make sure that the HeroService is registered as the provider of this service. You are registering it with an injector, which is the object that is responsible for choosing and injecting the provider where it is required.
 
-Removing data access from components means you can change your mind about the implementation anytime, without touching any components. They don't know how the service works.
+By default, the Angular CLI command ng generate service registers a provider with the root injector for your service by including provider metadata in the @Injectable decorator.
 
-The implementation in this tutorial will continue to deliver mock heroes.
+If you look at the @Injectable() statement right before the HeroService class definition, you can see that the providedIn metadata value is 'root':
 
-Import the Hero and HEROES.
+@Injectable({
+  providedIn: 'root',
+})
+When you provide the service at the root level, Angular creates a single, shared instance of HeroService and injects into any class that asks for it. Registering the provider in the @Injectable metadata also allows Angular to optimize an app by removing the service if it turns out not to be used after all.
 
-import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
+To learn more about providers, see the Providers section. To learn more about injectors, see the Dependency Injection guide.
 
-Add a getHeroes method to return the mock heroes.
+The HeroService is now ready to plug into the HeroesComponent.
 
-getHeroes(): Hero[] {
-  return HEROES;
-}
+This is an interim code sample that will allow you to provide and use the HeroService. At this point, the code will differ from the HeroService in the "final code review".
+
+Update HeroesComponent
+
+Open the HeroesComponent class file.
+
+Delete the HEROES import, because you won't need that anymore. Import the HeroService instead.
+
+Update HeroesComponent
+Open the HeroesComponent class file.
+
+Delete the HEROES import, because you won't need that anymore. Import the HeroService instead.
+
+src/app/heroes/heroes.component.ts (import HeroService)
+
+import { HeroService } from '../hero.service';
+Replace the definition of the heroes property with a simple declaration.
+
+heroes: Hero[];
+
+Inject the HeroService
+
+Add a private heroService parameter of type HeroService to the constructor.
+
+The parameter simultaneously defines a private heroService property and identifies it as a HeroService injection site.
+
+When Angular creates a HeroesComponent, the Dependency Injection system sets the heroService parameter to the singleton instance of HeroService.
 
 */
