@@ -23,44 +23,24 @@ h1 {
 
 /*
 
-https://angular.io/tutorial/toh-pt2#masterdetail
+After the browser refreshes, the list of names reappears. The details area is blank. Click a hero and its details appear.
 
-Master/Detail
-When the user clicks a hero in the master list, the component should display the selected hero's details at the bottom of the page.
+Why it works
+When selectedHero is undefined, the ngIf removes the hero detail from the DOM. There are no selectedHero bindings to worry about.
 
-In this section, you'll listen for the hero item click event and update the hero detail.
+When the user picks a hero, selectedHero has a value and ngIf puts the hero detail into the DOM.
 
-Add a click event binding
-Add a click event binding to the <li> like this:
-`.`
+Style the selected hero
+It's difficult to identify the selected hero in the list when all <li> elements look alike.
 
-This is an example of Angular's event binding syntax.
+If the user clicks "Magneta", that hero should render with a distinctive but subtle background color like this:
 
-The parentheses around click tell Angular to listen for the <li> element's click event. When the user clicks in the <li>, Angular executes the onSelect(hero) expression.
+Selected hero
+That selected hero coloring is the work of the .selected CSS class in the styles you added earlier. You just have to apply the .selected class to the <li> when the user clicks it.
 
-onSelect() is a HeroesComponent method that you're about to write. Angular calls it with the hero object displayed in the clicked <li>, the same hero defined previously in the *ngFor expression.
+The Angular class binding makes it easy to add and remove a CSS class conditionally. Just add [class.some-css-class]="some-condition" to the element you want to style.
 
-Add the click event handler
-Rename the component's hero property to selectedHero but don't assign it. There is no selected hero when the application starts.
-
-Add the following onSelect() method, which assigns the clicked hero from the template to the component's selectedHero.
-
-Update the details template
-The template still refers to the component's old hero property which no longer exists. Rename hero to selectedHero.
-After the browser refreshes, the application is broken.
-
-Open the browser developer tools and look in the console for an error message like this:
-
-HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
-
-What happened?
-
-When the app starts, the selectedHero is undefined by design.
-
-Binding expressions in the template that refer to properties of selectedHero — expressions like {{selectedHero.name}} — must fail because there is no selected hero.
-
-Now, click one of the list items. The app seems to be working again. The heroes appear in a list and details about the clicked hero appear at the bottom of the page.
-
+Add the following [class.selected] binding to the <li> in the HeroesComponent template:
 
 
 
